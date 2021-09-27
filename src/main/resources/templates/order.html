@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <div th:replace="/fragments/header :: header"/>
+</head>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<div class="container">
+
+    <div class="panel-default well" th:each="product : ${products.entrySet()}">
+        <div class="panel-heading">
+            <h1><a th:text="${product.getKey().name}" th:href="@{'/product/' + ${product.getKey().id}}">Title</a></h1>
+            <h3 th:text="${product.getKey().description}">Description</h3>
+        </div>
+        <div class="row panel-body">
+            <div th:inline="text" class="col-md-2">Price: [[${product.getKey().price}]] KSH</div>
+            <div th:inline="text" class="col-md-9">Quantity: [[${product.getValue()}]]</div>
+        </div>
+        <br></br>
+    </div>
+
+    <div class="row panel-body">
+        <a th:href="@{'/order'}" class="col-md-1">
+        </a>
+    </div>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>
